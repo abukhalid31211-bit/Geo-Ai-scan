@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/samgold-web/"
+title = "SAMGOLD Web — Auth"
+version = "1.0.0"
+id = "artifacts/samgold-web"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/samgold-web/" ]
+localPort = 25270
+
+[services.development]
+run = "pnpm --filter @workspace/samgold-web run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/samgold-web", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/samgold-web/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25270"
+BASE_PATH = "/samgold-web/"
