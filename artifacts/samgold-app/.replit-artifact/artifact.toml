@@ -1,0 +1,23 @@
+kind = "mobile"
+previewPath = "/"
+title = "SAMGOLD — تطبيق المسح الجيولوجي"
+version = "1.0.0"
+id = "artifacts/samgold-app"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/" ]
+localPort = 18581
+
+[services.development]
+run = "pnpm --filter @workspace/samgold-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/samgold-app", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/samgold-app", "run", "serve" ]
+
+[services.env]
+PORT = "18581"
+BASE_PATH = "/"
